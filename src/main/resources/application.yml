@@ -3,3 +3,4 @@ spring:
     name: gym_management_system
   liquibase:
     enabled: false
+    change-log: classpath:/db/changelog/db.changelog-master.yml
