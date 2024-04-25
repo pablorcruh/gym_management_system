@@ -8,10 +8,11 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@MappedSuperclass
 public class PersonEntity extends BaseEntity{
 
     @Column
-    private String name;
+    private String firstName;
 
     @Column
     private String fatherLastName;
