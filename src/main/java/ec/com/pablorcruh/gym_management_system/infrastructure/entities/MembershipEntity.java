@@ -36,9 +36,9 @@ public class MembershipEntity extends BaseEntity{
     private MembershipType membershipType;
 
     @Column
-    private Boolean state;
+    private Boolean isActive;
     @Column
-    private String observations;
+    private String comments;
 
     @ManyToOne
     @JoinColumn(name = "partner_id")
