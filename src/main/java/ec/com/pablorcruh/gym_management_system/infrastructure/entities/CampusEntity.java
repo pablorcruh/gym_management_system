@@ -7,9 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -21,6 +19,11 @@ public class CampusEntity extends BaseEntity{
     private String name;
     @Column
     private String ruc;
+    @Column
+    private String phoneNumber;
+    @Column
+    private String email;
+
 
     @OneToMany(mappedBy = "campus")
     private Set<PartnerEntity> partners= new HashSet<>();

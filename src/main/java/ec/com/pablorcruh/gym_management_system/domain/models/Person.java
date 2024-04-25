@@ -7,5 +7,4 @@ public class Person {
     private String fatherLastName;
     private String motherLastName;
     private String cedula;
-    private List<Contact> contacts;
 }

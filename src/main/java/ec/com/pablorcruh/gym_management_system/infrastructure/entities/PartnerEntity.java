@@ -16,6 +16,12 @@ import java.util.Set;
 @Table(name = "partner")
 public class PartnerEntity extends PersonEntity{
 
+    @Column
+    private String phoneNumber;
+
+    @Column
+    private String email;
+
     @OneToMany(mappedBy = "partner")
     private Set<MembershipEntity> memberships = new HashSet<>();
 
