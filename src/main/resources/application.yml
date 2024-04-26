@@ -5,7 +5,7 @@ spring:
     enabled: false
     change-log: classpath:/db/changelog/db.changelog-master.yml
   datasource:
-    url: jdbc:postgresql://localhost:5432/entidades
+    url: jdbc:postgresql://localhost:5432/gym-management-system
     username: root
     password: password
     driver-class-name: org.postgresql.Driver
@@ -23,4 +23,7 @@ spring:
     open-in-view: false
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      ddl-auto: none
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        show_sql: true
