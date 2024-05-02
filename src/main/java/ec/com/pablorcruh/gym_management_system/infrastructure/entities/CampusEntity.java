@@ -31,4 +31,8 @@ public class CampusEntity extends BaseEntity{
     @OneToMany(mappedBy = "campus")
     private Set<CampaignEntity> campaigns = new HashSet<>();
 
+    @ManyToOne
+    @JoinColumn(name = "main_company_id")
+    private MainCompanyEntity mainCompany;
+
 }
