@@ -11,6 +11,7 @@
     <groupId>ec.com.pablorcruh</groupId>
     <artifactId>gym_management_system</artifactId>
     <version>1.0.0</version>
+    <packaging>pom</packaging>
     <name>gym_management_system</name>
     <description>gym_management_system</description>
     <properties>
