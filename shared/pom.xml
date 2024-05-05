@@ -6,7 +6,7 @@
         <groupId>ec.com.pablorcruh</groupId>
         <artifactId>gym_management_system</artifactId>
         <version>1.0.0</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath>../gym/pom.xml</relativePath>
     </parent>
     <groupId>ec.com.pablorcruh</groupId>
     <artifactId>shared</artifactId>
