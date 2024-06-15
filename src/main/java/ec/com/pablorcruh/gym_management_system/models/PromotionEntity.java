@@ -1,4 +1,4 @@
-package ec.com.pablorcruh.gym_management_system.infrastructure.entities;
+package ec.com.pablorcruh.gym_management_system.models;
 
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;

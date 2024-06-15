@@ -1,4 +1,4 @@
-package ec.com.pablorcruh.gym_management_system.domain.enums;
+package ec.com.pablorcruh.gym_management_system.enums;
 
 public enum MembershipType {
     MONTH,
