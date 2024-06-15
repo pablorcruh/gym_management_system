@@ -26,6 +26,7 @@ public class MainCompanyConverter {
                 .email(entity.getEmail())
                 .phoneNumber(entity.getPhoneNumber())
                 .id(entity.getId())
+                .name(entity.getName())
                 .build();
         return response;
     }
