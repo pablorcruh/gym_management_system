@@ -1,6 +1,6 @@
 package ec.com.pablorcruh.gym_management_system.services.main_company;
 
-import ec.com.pablorcruh.gym_management_system.NotFoundException;
+import ec.com.pablorcruh.gym_management_system.exceptions.NotFoundException;
 import ec.com.pablorcruh.gym_management_system.dto.converter.MainCompanyConverter;
 import ec.com.pablorcruh.gym_management_system.dto.request.MainCompanyDTORequest;
 import ec.com.pablorcruh.gym_management_system.dto.response.MainCompanyDTOResponse;

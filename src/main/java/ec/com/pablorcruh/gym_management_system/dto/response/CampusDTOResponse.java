@@ -20,4 +20,6 @@ public class CampusDTOResponse {
 
     private String phoneNumber;
 
+    private Boolean active;
+
 }

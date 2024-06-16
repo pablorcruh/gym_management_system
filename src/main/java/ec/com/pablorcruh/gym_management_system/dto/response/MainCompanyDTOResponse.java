@@ -24,5 +24,7 @@ public class MainCompanyDTOResponse {
 
     private String phoneNumber;
 
+    private Boolean active;
+
     private List<CampusDTOResponse> campuses;
 }
