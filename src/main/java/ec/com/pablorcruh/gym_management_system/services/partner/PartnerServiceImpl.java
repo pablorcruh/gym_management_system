@@ -51,6 +51,28 @@ public class PartnerServiceImpl implements PartnerService{
         partnerRepository.save(partnerEntity);
     }
 
+    @Override
+    public PartnerDTOResponse updatePartner(UUID idCampus, UUID idPartner, PartnerDTORequest request) {
+        CampusEntity campusEntity = findByIdCampusEntity(idCampus);
+        if(campusEntity == null){
+            throw new NotFoundException(String.format("Campus with id: %s not found",idCampus));
+        }
+        PartnerEntity partnerEntity = findByIdPartnerEntity(idPartner);
+        if(campusEntity == null){
+            throw new NotFoundException(String.format("Partner with id: %s not found",idPartner));
+        }
+        partnerEntity.setUpdatedAt(new Date());
+        partnerEntity.setEmail(request.getEmail());
+        partnerEntity.setCedula(request.getCedula());
+        partnerEntity.setEmail(request.getCedula());
+        partnerEntity.setFirstName(request.getFirstName());
+        partnerEntity.setFatherLastName(request.getFatherLastName());
+        partnerEntity.setMotherLastName(request.getMotherLastName());
+        partnerEntity.setEmail(request.getEmail());
+        PartnerEntity savedPartner = partnerRepository.save(partnerEntity);
+        return partnerConverter.toResponse(savedPartner);
+    }
+
     private CampusEntity findByIdCampusEntity(UUID idCampus){
         return campusRepository.findById(idCampus).orElse(null);
     }

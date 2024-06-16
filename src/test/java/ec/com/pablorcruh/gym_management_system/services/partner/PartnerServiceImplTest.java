@@ -3,6 +3,7 @@ package ec.com.pablorcruh.gym_management_system.services.partner;
 import ec.com.pablorcruh.gym_management_system.dto.converter.CampusConverter;
 import ec.com.pablorcruh.gym_management_system.dto.converter.PartnerConverter;
 import ec.com.pablorcruh.gym_management_system.dto.response.PartnerDTOResponse;
+import ec.com.pablorcruh.gym_management_system.models.MainCompanyEntity;
 import ec.com.pablorcruh.gym_management_system.models.PartnerEntity;
 import ec.com.pablorcruh.gym_management_system.repository.CampusRepository;
 import ec.com.pablorcruh.gym_management_system.repository.PartnerRepository;
@@ -66,6 +67,21 @@ class PartnerServiceImplTest {
         when(partnerRepository.findById(any(UUID.class))).thenReturn(Optional.of(PartnerCreationUtils.createPartnerEntity()));
         underTest.softDeletePartner(UUID.randomUUID(), UUID.randomUUID());
         verify(campusRepository,times(1)).findById(any(UUID.class));
+        verify(partnerRepository,times(1)).save(any(PartnerEntity.class));
+        verify(partnerRepository,times(1)).findById(any(UUID.class));
+    }
+
+    @Test
+    void shouldupdatePartner(){
+        when(campusRepository.findById(any(UUID.class))).thenReturn(Optional.of(CreationUtils.createCampusEntity()));
+        when(partnerRepository.findById(any(UUID.class))).thenReturn(Optional.of(PartnerCreationUtils.createPartnerEntity()));
+        when(partnerRepository.save(any(PartnerEntity.class))).thenReturn(PartnerCreationUtils.createPartnerEntity());
+        PartnerDTOResponse response = underTest.updatePartner(
+                UUID.randomUUID(),
+                UUID.randomUUID(),
+                PartnerCreationUtils.createPartnerDTORequest());
+        assertThat(response.getEmail().equals("pablo@mail.com"));
+        assertNotNull(response);
         verify(partnerRepository,times(1)).save(any(PartnerEntity.class));
         verify(partnerRepository,times(1)).findById(any(UUID.class));
     }

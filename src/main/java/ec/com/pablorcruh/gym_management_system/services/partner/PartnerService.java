@@ -11,4 +11,6 @@ public interface PartnerService {
 
     void softDeletePartner(UUID idCampus, UUID idPartner);
 
+    PartnerDTOResponse updatePartner(UUID idCampus, UUID idPartner, PartnerDTORequest request);
+
 }

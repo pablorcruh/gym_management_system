@@ -34,4 +34,14 @@ public class PartnerController {
         partnerService.softDeletePartner(idCampus, idPartner);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @PutMapping("/campus/{idCampus}/partner/{idPartner}")
+    public ResponseEntity<PartnerDTOResponse> updatePartner(
+            @PathVariable(value = "idCampus") UUID idCampus,
+            @PathVariable(value = "idPartner") UUID idPartner,
+            @RequestBody PartnerDTORequest request
+    ){
+        PartnerDTOResponse response = partnerService.updatePartner(idCampus,idPartner, request);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 }
