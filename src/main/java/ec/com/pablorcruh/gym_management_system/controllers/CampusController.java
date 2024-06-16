@@ -3,7 +3,6 @@ package ec.com.pablorcruh.gym_management_system.controllers;
 import ec.com.pablorcruh.gym_management_system.dto.request.CampusDTORequest;
 import ec.com.pablorcruh.gym_management_system.dto.response.CampusDTOResponse;
 import ec.com.pablorcruh.gym_management_system.services.campus.CampusService;
-import lombok.Getter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
