@@ -25,7 +25,7 @@ public class CampusEntity extends BaseEntity{
     private String email;
 
 
-    @OneToMany(mappedBy = "campus")
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "campus")
     private Set<PartnerEntity> partners= new HashSet<>();
 
     @OneToMany(mappedBy = "campus")

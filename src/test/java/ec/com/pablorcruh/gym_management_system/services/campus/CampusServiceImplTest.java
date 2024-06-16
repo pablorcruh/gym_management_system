@@ -1,6 +1,7 @@
 package ec.com.pablorcruh.gym_management_system.services.campus;
 
 import ec.com.pablorcruh.gym_management_system.dto.converter.CampusConverter;
+import ec.com.pablorcruh.gym_management_system.dto.converter.PartnerConverter;
 import ec.com.pablorcruh.gym_management_system.dto.response.CampusDTOResponse;
 import ec.com.pablorcruh.gym_management_system.dto.response.MainCompanyDTOResponse;
 import ec.com.pablorcruh.gym_management_system.exceptions.NotFoundException;
@@ -41,10 +42,14 @@ class CampusServiceImplTest {
     @Mock
     CampusConverter campusConverter;
 
+    @Mock
+    PartnerConverter partnerConverter;
+
     @BeforeEach
     void setup(){
         modelMapper = new ModelMapper();
-        campusConverter = new CampusConverter(modelMapper);
+        partnerConverter = new PartnerConverter(modelMapper);
+        campusConverter = new CampusConverter(modelMapper, partnerConverter);
         underTest = new CampusServiceImpl(campusRepository, mainCompanyRepository, campusConverter);
     }
 

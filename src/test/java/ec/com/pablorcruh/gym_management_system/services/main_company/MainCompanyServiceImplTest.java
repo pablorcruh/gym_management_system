@@ -2,6 +2,7 @@ package ec.com.pablorcruh.gym_management_system.services.main_company;
 
 import ec.com.pablorcruh.gym_management_system.dto.converter.CampusConverter;
 import ec.com.pablorcruh.gym_management_system.dto.converter.MainCompanyConverter;
+import ec.com.pablorcruh.gym_management_system.dto.converter.PartnerConverter;
 import ec.com.pablorcruh.gym_management_system.dto.response.MainCompanyDTOResponse;
 import ec.com.pablorcruh.gym_management_system.models.MainCompanyEntity;
 import ec.com.pablorcruh.gym_management_system.repository.MainCompanyRepository;
@@ -33,12 +34,16 @@ class MainCompanyServiceImplTest {
     MainCompanyConverter mainCompanyConverter;
     @Mock
     CampusConverter campusConverter;
+
+    @Mock
+    PartnerConverter partnerConverter;
     @Mock
     ModelMapper modelMapper;
     @BeforeEach
     void setup(){
         modelMapper = new ModelMapper();
-        campusConverter = new CampusConverter(modelMapper);
+        partnerConverter = new PartnerConverter(modelMapper);
+        campusConverter = new CampusConverter(modelMapper, partnerConverter);
         mainCompanyConverter = new MainCompanyConverter(modelMapper, campusConverter);
         underTest = new MainCompanyServiceImpl(repository, mainCompanyConverter);
     }

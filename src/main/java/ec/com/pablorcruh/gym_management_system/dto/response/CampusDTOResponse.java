@@ -2,6 +2,7 @@ package ec.com.pablorcruh.gym_management_system.dto.response;
 
 import lombok.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -21,5 +22,7 @@ public class CampusDTOResponse {
     private String phoneNumber;
 
     private Boolean active;
+
+    private List<PartnerDTOResponse> partners;
 
 }
