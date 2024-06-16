@@ -9,4 +9,6 @@ public interface PartnerService {
 
     PartnerDTOResponse createPartner(UUID idCampus, PartnerDTORequest request);
 
+    void softDeletePartner(UUID idCampus, UUID idPartner);
+
 }

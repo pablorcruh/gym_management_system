@@ -25,4 +25,13 @@ public class PartnerController {
         PartnerDTOResponse response = partnerService.createPartner(idCampus,request);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
+
+    @DeleteMapping("/campus/{idCampus}/partner/{idPartner}")
+    public ResponseEntity<Void> deletePartner(
+            @PathVariable(value = "idCampus") UUID idCampus,
+            @PathVariable(value = "idPartner") UUID idPartner
+    ){
+        partnerService.softDeletePartner(idCampus, idPartner);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

@@ -10,6 +10,7 @@ import ec.com.pablorcruh.gym_management_system.repository.CampusRepository;
 import ec.com.pablorcruh.gym_management_system.repository.PartnerRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.UUID;
 
 @Service
@@ -35,7 +36,27 @@ public class PartnerServiceImpl implements PartnerService{
         return partnerConverter.toResponse(savedPartner);
     }
 
+    @Override
+    public void softDeletePartner(UUID idCampus, UUID idPartner) {
+        CampusEntity campusEntity = findByIdCampusEntity(idCampus);
+        if(campusEntity == null){
+            throw new NotFoundException(String.format("Campus with id: %s not found",idCampus));
+        }
+        PartnerEntity partnerEntity = findByIdPartnerEntity(idPartner);
+        if(campusEntity == null){
+            throw new NotFoundException(String.format("Partner with id: %s not found",idPartner));
+        }
+        partnerEntity.setActive(false);
+        partnerEntity.setUpdatedAt(new Date());
+        partnerRepository.save(partnerEntity);
+    }
+
     private CampusEntity findByIdCampusEntity(UUID idCampus){
         return campusRepository.findById(idCampus).orElse(null);
     }
+
+    private PartnerEntity findByIdPartnerEntity(UUID idPartner){
+        return partnerRepository.findById(idPartner).orElse(null);
+    }
+
 }

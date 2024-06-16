@@ -60,4 +60,14 @@ class PartnerServiceImplTest {
         verify(partnerRepository, times(1)).save(any(PartnerEntity.class));
     }
 
+    @Test
+    void shouldSoftDeletePartner(){
+        when(campusRepository.findById(any(UUID.class))).thenReturn(Optional.of(CreationUtils.createCampusEntity()));
+        when(partnerRepository.findById(any(UUID.class))).thenReturn(Optional.of(PartnerCreationUtils.createPartnerEntity()));
+        underTest.softDeletePartner(UUID.randomUUID(), UUID.randomUUID());
+        verify(campusRepository,times(1)).findById(any(UUID.class));
+        verify(partnerRepository,times(1)).save(any(PartnerEntity.class));
+        verify(partnerRepository,times(1)).findById(any(UUID.class));
+    }
+
 }

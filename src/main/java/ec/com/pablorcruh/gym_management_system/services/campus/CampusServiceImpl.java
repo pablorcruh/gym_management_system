@@ -53,6 +53,7 @@ public class CampusServiceImpl implements CampusService{
             throw new NotFoundException(String.format("Campus with id %s not found", campusId));
         }
         campusEntity.setActive(false);
+        campusEntity.setUpdatedAt(new Date());
         campusRepository.save(campusEntity);
     }
 
