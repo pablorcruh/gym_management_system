@@ -1,18 +1,14 @@
 package ec.com.pablorcruh.gym_management_system.dto.response;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import java.util.List;
 import java.util.UUID;
 
 @Getter
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
-public class MainCompanyDTOResponse {
+public class CampusDTOResponse {
 
     private UUID id;
 
@@ -24,5 +20,4 @@ public class MainCompanyDTOResponse {
 
     private String phoneNumber;
 
-    private List<CampusDTOResponse> campuses;
 }
