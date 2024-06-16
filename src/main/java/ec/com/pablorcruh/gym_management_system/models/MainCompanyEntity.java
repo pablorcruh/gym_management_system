@@ -1,9 +1,6 @@
-package ec.com.pablorcruh.gym_management_system.infrastructure.entities;
+package ec.com.pablorcruh.gym_management_system.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -30,6 +27,6 @@ public class MainCompanyEntity extends BaseEntity{
     @Column
     private String phoneNumber;
 
-    @OneToMany(mappedBy = "mainCompany")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "mainCompany")
     private Set<CampusEntity> campus = new HashSet<>();
 }

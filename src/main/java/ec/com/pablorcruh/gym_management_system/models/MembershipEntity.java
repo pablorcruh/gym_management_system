@@ -1,6 +1,6 @@
-package ec.com.pablorcruh.gym_management_system.infrastructure.entities;
+package ec.com.pablorcruh.gym_management_system.models;
 
-import ec.com.pablorcruh.gym_management_system.domain.enums.MembershipType;
+import ec.com.pablorcruh.gym_management_system.enums.MembershipType;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

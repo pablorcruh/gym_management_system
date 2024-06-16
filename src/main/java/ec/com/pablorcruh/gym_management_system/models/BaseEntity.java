@@ -1,4 +1,4 @@
-package ec.com.pablorcruh.gym_management_system.infrastructure.entities;
+package ec.com.pablorcruh.gym_management_system.models;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -24,10 +24,13 @@ public class BaseEntity implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
 
+    @Column(name = "active")
+    private Boolean active;
+
     @PrePersist
     public void prePersist() {
         this.createdAt = new Date(System.currentTimeMillis());
         this.id = UUID.randomUUID();
-
+        this.active = true;
     }
 }
