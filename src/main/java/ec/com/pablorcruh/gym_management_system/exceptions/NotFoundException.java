@@ -1,4 +1,4 @@
-package ec.com.pablorcruh.gym_management_system;
+package ec.com.pablorcruh.gym_management_system.exceptions;
 
 public class NotFoundException extends RuntimeException{
 

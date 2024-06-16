@@ -35,6 +35,7 @@ public class MainCompanyConverter {
                 .phoneNumber(entity.getPhoneNumber())
                 .id(entity.getId())
                 .name(entity.getName())
+                .active(entity.getActive())
                 .campuses(campusesEntity.stream().map(c -> campusConverter.toResponse(c)).collect(Collectors.toList()))
                 .build();
         return response;

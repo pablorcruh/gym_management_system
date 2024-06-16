@@ -25,6 +25,7 @@ public class CampusConverter {
                 .name(entity.getName())
                 .email(entity.getEmail())
                 .phoneNumber(entity.getPhoneNumber())
+                .active(entity.getActive())
                 .id(entity.getId())
                 .build();
         return response;
