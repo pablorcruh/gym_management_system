@@ -4,6 +4,8 @@ import ec.com.pablorcruh.gym_management_system.dto.request.PartnerDTORequest;
 import ec.com.pablorcruh.gym_management_system.dto.response.PartnerDTOResponse;
 import ec.com.pablorcruh.gym_management_system.models.PartnerEntity;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class PartnerCreationUtils {
@@ -31,5 +33,12 @@ public class PartnerCreationUtils {
                 .firstName("pablo")
                 .build();
         return request;
+    }
+
+    public static List<PartnerEntity> createPartnerEntityList(){
+        List<PartnerEntity> entities = new ArrayList<>();
+        entities.add(createPartnerEntity());
+        entities.add(createPartnerEntity());
+        return entities;
     }
 }

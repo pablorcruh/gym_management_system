@@ -3,7 +3,6 @@ package ec.com.pablorcruh.gym_management_system.services.partner;
 import ec.com.pablorcruh.gym_management_system.dto.converter.CampusConverter;
 import ec.com.pablorcruh.gym_management_system.dto.converter.PartnerConverter;
 import ec.com.pablorcruh.gym_management_system.dto.response.PartnerDTOResponse;
-import ec.com.pablorcruh.gym_management_system.models.MainCompanyEntity;
 import ec.com.pablorcruh.gym_management_system.models.PartnerEntity;
 import ec.com.pablorcruh.gym_management_system.repository.CampusRepository;
 import ec.com.pablorcruh.gym_management_system.repository.PartnerRepository;
@@ -16,6 +15,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -86,4 +86,12 @@ class PartnerServiceImplTest {
         verify(partnerRepository,times(1)).findById(any(UUID.class));
     }
 
+    @Test
+    void shouldGetAllActivePartnerByCampus(){
+        when(partnerRepository.findAllActiveByCampusId(any(UUID.class))).thenReturn(PartnerCreationUtils.createPartnerEntityList());
+        List<PartnerDTOResponse> response = underTest.getAllActiveByCampusId(UUID.fromString("68ba3213-1c1c-440b-9cca-8594f536a1bb"));
+        assertNotNull(response);
+        assertEquals(response.size(),2);
+        verify(partnerRepository, times(1)).findAllActiveByCampusId(UUID.fromString("68ba3213-1c1c-440b-9cca-8594f536a1bb"));
+    }
 }

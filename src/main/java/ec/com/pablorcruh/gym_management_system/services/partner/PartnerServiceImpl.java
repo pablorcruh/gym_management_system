@@ -11,7 +11,9 @@ import ec.com.pablorcruh.gym_management_system.repository.PartnerRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class PartnerServiceImpl implements PartnerService{
@@ -71,6 +73,12 @@ public class PartnerServiceImpl implements PartnerService{
         partnerEntity.setEmail(request.getEmail());
         PartnerEntity savedPartner = partnerRepository.save(partnerEntity);
         return partnerConverter.toResponse(savedPartner);
+    }
+
+    @Override
+    public List<PartnerDTOResponse> getAllActiveByCampusId(UUID idCampus) {
+        List<PartnerEntity> partners = partnerRepository.findAllActiveByCampusId(idCampus);
+        return partners.stream().map(p -> partnerConverter.toResponse(p)).collect(Collectors.toList());
     }
 
     private CampusEntity findByIdCampusEntity(UUID idCampus){

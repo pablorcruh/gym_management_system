@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -42,6 +43,12 @@ public class PartnerController {
             @RequestBody PartnerDTORequest request
     ){
         PartnerDTOResponse response = partnerService.updatePartner(idCampus,idPartner, request);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/campus/{idCampus}")
+    public ResponseEntity<List<PartnerDTOResponse>> getAllActiveFromCampusId(@PathVariable(value = "idCampus")UUID idCampus){
+        List<PartnerDTOResponse> response = partnerService.getAllActiveByCampusId(idCampus);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }
