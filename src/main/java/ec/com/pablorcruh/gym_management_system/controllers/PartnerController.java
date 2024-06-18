@@ -51,4 +51,13 @@ public class PartnerController {
         List<PartnerDTOResponse> response = partnerService.getAllActiveByCampusId(idCampus);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
+    @GetMapping("/campus/{idCampus}/partner/{idPartner}")
+    public ResponseEntity<PartnerDTOResponse> getPartnerById(
+            @PathVariable(value = "idCampus") UUID idCampus,
+            @PathVariable(value = "idPartner") UUID idPartner
+    ){
+        PartnerDTOResponse response= partnerService.findPartnerById(idCampus,idPartner);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 }

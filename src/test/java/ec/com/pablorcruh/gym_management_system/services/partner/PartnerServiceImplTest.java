@@ -2,12 +2,14 @@ package ec.com.pablorcruh.gym_management_system.services.partner;
 
 import ec.com.pablorcruh.gym_management_system.dto.converter.CampusConverter;
 import ec.com.pablorcruh.gym_management_system.dto.converter.PartnerConverter;
+import ec.com.pablorcruh.gym_management_system.dto.response.CampusDTOResponse;
 import ec.com.pablorcruh.gym_management_system.dto.response.PartnerDTOResponse;
 import ec.com.pablorcruh.gym_management_system.models.PartnerEntity;
 import ec.com.pablorcruh.gym_management_system.repository.CampusRepository;
 import ec.com.pablorcruh.gym_management_system.repository.PartnerRepository;
 import ec.com.pablorcruh.gym_management_system.util.CreationUtils;
 import ec.com.pablorcruh.gym_management_system.util.PartnerCreationUtils;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -93,5 +95,14 @@ class PartnerServiceImplTest {
         assertNotNull(response);
         assertEquals(response.size(),2);
         verify(partnerRepository, times(1)).findAllActiveByCampusId(UUID.fromString("68ba3213-1c1c-440b-9cca-8594f536a1bb"));
+    }
+
+    @Test
+    void shouldGetOnePartner(){
+        when(partnerRepository.findByIdCampusAndIdPartner(any(UUID.class), any(UUID.class))).thenReturn(PartnerCreationUtils.createPartnerEntity());
+        PartnerDTOResponse response = underTest.findPartnerById(UUID.fromString("68ba3213-1c1c-440b-9cca-8594f536a1bb"),UUID.fromString("df2729eb-bd1f-401a-8259-2094f4a9d4ac"));
+        assertNotNull(response);
+        Assertions.assertThat(response.getEmail().equals("pablo@maincompany.com"));
+        verify(partnerRepository, times(1)).findByIdCampusAndIdPartner(any(UUID.class),any(UUID.class));
     }
 }

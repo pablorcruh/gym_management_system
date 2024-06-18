@@ -16,5 +16,6 @@ public interface PartnerService {
 
     List<PartnerDTOResponse> getAllActiveByCampusId(UUID idCampus);
 
+    PartnerDTOResponse findPartnerById(UUID idCampus, UUID idPartner);
 
 }

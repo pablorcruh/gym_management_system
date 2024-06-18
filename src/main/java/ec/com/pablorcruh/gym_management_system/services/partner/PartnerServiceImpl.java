@@ -81,6 +81,12 @@ public class PartnerServiceImpl implements PartnerService{
         return partners.stream().map(p -> partnerConverter.toResponse(p)).collect(Collectors.toList());
     }
 
+    @Override
+    public PartnerDTOResponse findPartnerById(UUID idCampus, UUID idPartner) {
+        PartnerEntity response = partnerRepository.findByIdCampusAndIdPartner(idCampus, idPartner);
+        return partnerConverter.toResponse(response);
+    }
+
     private CampusEntity findByIdCampusEntity(UUID idCampus){
         return campusRepository.findById(idCampus).orElse(null);
     }

@@ -12,4 +12,11 @@ public interface PartnerRepository extends JpaRepository<PartnerEntity, UUID> {
 
     @Query(value = "select p from PartnerEntity  p where p.campus.id =:idCampus and p.active = true")
     List<PartnerEntity> findAllActiveByCampusId(@Param(value = "idCampus") UUID idCampus);
+
+    @Query(value = "select p from PartnerEntity p where p.campus.id =:idCampus and p.id =:idPartner")
+    PartnerEntity findByIdCampusAndIdPartner(
+            @Param(value = "idCampus")
+            UUID idCampus,
+            @Param(value = "idPartner")
+            UUID idPartner);
 }
