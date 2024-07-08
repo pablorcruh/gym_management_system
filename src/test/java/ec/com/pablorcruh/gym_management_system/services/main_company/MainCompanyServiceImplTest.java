@@ -13,6 +13,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 import java.util.Optional;
@@ -78,9 +79,10 @@ class MainCompanyServiceImplTest {
     @Test
     void shouldGetAllMainCompanies(){
         when(repository.findAllMainCompanyActive()).thenReturn(CreationUtils.createMainCompanyEntityList());
-        List<MainCompanyDTOResponse> response = underTest.getAllActive();
+        Page<MainCompanyDTOResponse> response = underTest.getAllActive(0,10);
         assertNotNull(response);
-        assertEquals(response.size(),2);
+        assertEquals(response.getTotalPages(),1);
+        assertEquals(response.getTotalElements(),2);
         verify(repository, times(1)).findAllMainCompanyActive();
     }
 
