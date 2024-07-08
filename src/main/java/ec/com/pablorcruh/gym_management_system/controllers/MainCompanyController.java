@@ -3,6 +3,7 @@ package ec.com.pablorcruh.gym_management_system.controllers;
 import ec.com.pablorcruh.gym_management_system.dto.request.MainCompanyDTORequest;
 import ec.com.pablorcruh.gym_management_system.dto.response.MainCompanyDTOResponse;
 import ec.com.pablorcruh.gym_management_system.services.main_company.MainCompanyService;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -44,9 +45,12 @@ public class MainCompanyController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<MainCompanyDTOResponse>> getAllActive(){
-        List<MainCompanyDTOResponse> response = service.getAllActive();
-        return new ResponseEntity<>(response, HttpStatus.OK);
+    public ResponseEntity<Page<MainCompanyDTOResponse>> getAllActive(
+            @RequestParam int page,
+            @RequestParam int size
+    ){
+        Page<MainCompanyDTOResponse> response = service.getAllActive(page, size);
+        return ResponseEntity.ok().body(response);
     }
 
     @GetMapping("/{id}")

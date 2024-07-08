@@ -16,6 +16,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 import java.util.Optional;
@@ -87,9 +88,9 @@ class CampusServiceImplTest {
     void shouldGetAllCampus(){
         when(mainCompanyRepository.findById(any(UUID.class))).thenReturn(Optional.of(CreationUtils.createMainCompanyEntity()));
         when(campusRepository.findAllActive(any(UUID.class))).thenReturn(CreationUtils.crateCampusEntityList());
-        List<CampusDTOResponse> response = underTest.getAllCampusActive(UUID.fromString("e6616ae0-b732-4ce1-a256-1669a9664fb1"));
+        Page<CampusDTOResponse> response = underTest.getAllCampusActive(UUID.fromString("e6616ae0-b732-4ce1-a256-1669a9664fb1"), 0, 10);
         assertNotNull(response);
-        assertEquals(response.size(),2);
+        assertEquals(response.getTotalElements(),2);
         verify(campusRepository, times(1)).findAllActive(UUID.fromString("e6616ae0-b732-4ce1-a256-1669a9664fb1"));
     }
 

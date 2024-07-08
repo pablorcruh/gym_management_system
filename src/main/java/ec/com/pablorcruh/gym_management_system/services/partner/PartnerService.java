@@ -2,8 +2,8 @@ package ec.com.pablorcruh.gym_management_system.services.partner;
 
 import ec.com.pablorcruh.gym_management_system.dto.request.PartnerDTORequest;
 import ec.com.pablorcruh.gym_management_system.dto.response.PartnerDTOResponse;
+import org.springframework.data.domain.Page;
 
-import java.util.List;
 import java.util.UUID;
 
 public interface PartnerService {
@@ -14,7 +14,7 @@ public interface PartnerService {
 
     PartnerDTOResponse updatePartner(UUID idCampus, UUID idPartner, PartnerDTORequest request);
 
-    List<PartnerDTOResponse> getAllActiveByCampusId(UUID idCampus);
+    Page<PartnerDTOResponse> getAllActiveByCampusId(UUID idCampus, int page, int size);
 
     PartnerDTOResponse findPartnerById(UUID idCampus, UUID idPartner);
 

@@ -6,6 +6,10 @@ import ec.com.pablorcruh.gym_management_system.dto.request.MainCompanyDTORequest
 import ec.com.pablorcruh.gym_management_system.dto.response.MainCompanyDTOResponse;
 import ec.com.pablorcruh.gym_management_system.models.MainCompanyEntity;
 import ec.com.pablorcruh.gym_management_system.repository.MainCompanyRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -60,9 +64,11 @@ public class MainCompanyServiceImpl implements MainCompanyService{
     }
 
     @Override
-    public List<MainCompanyDTOResponse> getAllActive() {
+    public Page<MainCompanyDTOResponse> getAllActive(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
         List<MainCompanyEntity> entities = repository.findAllMainCompanyActive();
-        return entities.stream().map(m -> converter.toResponse(m)).collect(Collectors.toList());
+        Page<MainCompanyEntity> pageEntities = new PageImpl<>(entities, pageable, entities.size());
+        return pageEntities.map(p -> converter.toResponse(p));
     }
 
     @Override

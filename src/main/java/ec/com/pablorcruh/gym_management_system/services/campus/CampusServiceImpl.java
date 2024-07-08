@@ -8,6 +8,10 @@ import ec.com.pablorcruh.gym_management_system.models.CampusEntity;
 import ec.com.pablorcruh.gym_management_system.models.MainCompanyEntity;
 import ec.com.pablorcruh.gym_management_system.repository.CampusRepository;
 import ec.com.pablorcruh.gym_management_system.repository.MainCompanyRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -77,13 +81,15 @@ public class CampusServiceImpl implements CampusService{
     }
 
     @Override
-    public List<CampusDTOResponse> getAllCampusActive(UUID idMainCompany) {
+    public Page<CampusDTOResponse> getAllCampusActive(UUID idMainCompany, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
         MainCompanyEntity mainCompanyEntity = findMainCompanyEntityById(idMainCompany);
         if(mainCompanyEntity == null){
             throw new NotFoundException(String.format("Main company with id %s not found", idMainCompany));
         }
         List<CampusEntity> entities = campusRepository.findAllActive(idMainCompany);
-        return entities.stream().map(c -> converter.toResponse(c)).collect(Collectors.toList());
+        Page<CampusEntity> campusPage = new PageImpl<>(entities, pageable, entities.size());
+        return campusPage.map(p -> converter.toResponse(p));
     }
 
     @Override

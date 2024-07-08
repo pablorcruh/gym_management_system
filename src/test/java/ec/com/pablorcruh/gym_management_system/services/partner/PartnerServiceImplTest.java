@@ -16,6 +16,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 import java.util.Optional;
@@ -91,9 +92,9 @@ class PartnerServiceImplTest {
     @Test
     void shouldGetAllActivePartnerByCampus(){
         when(partnerRepository.findAllActiveByCampusId(any(UUID.class))).thenReturn(PartnerCreationUtils.createPartnerEntityList());
-        List<PartnerDTOResponse> response = underTest.getAllActiveByCampusId(UUID.fromString("68ba3213-1c1c-440b-9cca-8594f536a1bb"));
+        Page<PartnerDTOResponse> response = underTest.getAllActiveByCampusId(UUID.fromString("68ba3213-1c1c-440b-9cca-8594f536a1bb"), 0, 10);
         assertNotNull(response);
-        assertEquals(response.size(),2);
+        assertEquals(response.getTotalElements(),2);
         verify(partnerRepository, times(1)).findAllActiveByCampusId(UUID.fromString("68ba3213-1c1c-440b-9cca-8594f536a1bb"));
     }
 

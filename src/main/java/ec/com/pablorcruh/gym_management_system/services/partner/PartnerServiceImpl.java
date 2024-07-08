@@ -8,6 +8,10 @@ import ec.com.pablorcruh.gym_management_system.models.CampusEntity;
 import ec.com.pablorcruh.gym_management_system.models.PartnerEntity;
 import ec.com.pablorcruh.gym_management_system.repository.CampusRepository;
 import ec.com.pablorcruh.gym_management_system.repository.PartnerRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -76,9 +80,11 @@ public class PartnerServiceImpl implements PartnerService{
     }
 
     @Override
-    public List<PartnerDTOResponse> getAllActiveByCampusId(UUID idCampus) {
+    public Page<PartnerDTOResponse> getAllActiveByCampusId(UUID idCampus, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
         List<PartnerEntity> partners = partnerRepository.findAllActiveByCampusId(idCampus);
-        return partners.stream().map(p -> partnerConverter.toResponse(p)).collect(Collectors.toList());
+        Page<PartnerEntity> partnerPage = new PageImpl<>(partners, pageable, partners.size());
+        return partnerPage.map(p -> partnerConverter.toResponse(p));
     }
 
     @Override

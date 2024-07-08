@@ -3,6 +3,7 @@ package ec.com.pablorcruh.gym_management_system.controllers;
 import ec.com.pablorcruh.gym_management_system.dto.request.PartnerDTORequest;
 import ec.com.pablorcruh.gym_management_system.dto.response.PartnerDTOResponse;
 import ec.com.pablorcruh.gym_management_system.services.partner.PartnerService;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -47,9 +48,14 @@ public class PartnerController {
     }
 
     @GetMapping("/campus/{idCampus}")
-    public ResponseEntity<List<PartnerDTOResponse>> getAllActiveFromCampusId(@PathVariable(value = "idCampus")UUID idCampus){
-        List<PartnerDTOResponse> response = partnerService.getAllActiveByCampusId(idCampus);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+    public ResponseEntity<Page<PartnerDTOResponse>> getAllActiveFromCampusId(
+            @PathVariable(value = "idCampus")
+            UUID idCampus,
+            @RequestParam int page,
+            @RequestParam int size
+            ){
+        Page<PartnerDTOResponse> response = partnerService.getAllActiveByCampusId(idCampus, page, size);
+        return ResponseEntity.ok().body(response);
     }
 
     @GetMapping("/campus/{idCampus}/partner/{idPartner}")
